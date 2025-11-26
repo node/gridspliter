@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Github } from 'lucide-react';
 import TutorialModal from './TutorialModal';
 
 const XIcon = () => (
@@ -39,9 +39,6 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
                   className="w-5 h-5 object-contain rounded"
                 />
               </div>
-              <span className="text-base font-semibold text-apple-text">
-                BlockSlice
-              </span>
             </div>
 
             {/* Icons */}
@@ -53,6 +50,15 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
               >
                 <Sparkles size={18} />
               </button>
+              <a
+                href="https://github.com/onebtcdesign/BlockX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-apple-gray text-apple-subtext hover:text-apple-text transition-all duration-200"
+                aria-label="GitHub Repository"
+              >
+                <Github size={18} />
+              </a>
               <a
                 href="https://x.com/onebtcdesign"
                 target="_blank"
@@ -96,6 +102,15 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
           >
             <Sparkles size={20} />
           </button>
+          <a
+            href="https://github.com/onebtcdesign/BlockX"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-text transition-all duration-200"
+            aria-label="GitHub Repository"
+          >
+            <Github size={20} />
+          </a>
           <a
             href="https://x.com/onebtcdesign"
             target="_blank"

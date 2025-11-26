@@ -106,13 +106,13 @@ const Sidebar: React.FC<SidebarProps> = ({
          </div>
       </Card>
 
-      {/* 2. Scale & Crop Settings */}
+      {/* 2. Scale, Crop & Padding Settings */}
       <Card className="py-4 px-5">
          <div className="flex items-center justify-between mb-3">
              <h4 className="font-semibold text-xs text-apple-subtext uppercase tracking-wider flex items-center gap-2">
                  <Move size={14} /> 调整与裁剪
              </h4>
-             <button 
+             <button
                 onClick={resetTransforms}
                 disabled={isDisabled}
                 className="text-[10px] text-apple-blue hover:underline disabled:opacity-50 flex items-center gap-1"
@@ -155,124 +155,113 @@ const Sidebar: React.FC<SidebarProps> = ({
                          <button onClick={() => handleScaleStep('Y', 0.01)} disabled={isDisabled} className="w-6 h-6 flex items-center justify-center rounded-full bg-apple-gray hover:bg-gray-200 text-apple-text transition-colors disabled:opacity-50"><Plus size={12} /></button>
                      </div>
                  </div>
-                 
+
                  <p className="text-[9px] text-apple-subtext text-center mt-0.5">
                      提示：也可在预览区使用滚轮缩放，拖拽移动
                  </p>
              </div>
-             
-             {/* Format */}
-             <div className="flex flex-col gap-1.5 pt-2 border-t border-apple-border/40">
-                <label className="text-[10px] font-medium text-apple-text">导出格式</label>
-                <div className="flex bg-apple-gray p-1 rounded-xl">
-                    {(['png', 'jpg', 'webp'] as const).map(fmt => (
-                    <button key={fmt} disabled={isDisabled} onClick={() => handleInputChange('format', fmt)} className={`flex-1 py-1.5 text-xs font-medium uppercase rounded-lg transition-all ${settings.format === fmt ? 'bg-white shadow-sm text-apple-text' : 'text-apple-subtext hover:text-apple-text'}`}>{fmt}</button>
-                    ))}
-                </div>
-            </div>
+
+             {/* Padding/Margin Section */}
+             <div className="pt-4 border-t border-apple-border/40 space-y-3">
+                 <div className="flex items-center justify-between">
+                     <label className="text-[10px] font-medium text-apple-text flex items-center gap-1">
+                         <Crop size={12} /> 切割边距
+                     </label>
+                     <button
+                        onClick={() => setSettings(prev => ({ ...prev, paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 }))}
+                        disabled={isDisabled}
+                        className="text-[10px] text-apple-blue hover:underline disabled:opacity-50"
+                     >
+                         重置
+                     </button>
+                 </div>
+
+                 {/* Unified padding control */}
+                 <div className="flex flex-col gap-1.5">
+                     <label className="text-[10px] font-medium text-apple-text">统一边距 (px)</label>
+                     <input
+                         type="number"
+                         min="0"
+                         max="200"
+                         disabled={isDisabled}
+                         placeholder="0"
+                         onChange={(e) => {
+                             const val = Math.max(0, parseInt(e.target.value) || 0);
+                             setSettings(prev => ({ ...prev, paddingTop: val, paddingRight: val, paddingBottom: val, paddingLeft: val }));
+                         }}
+                         className="w-full px-3 py-2 bg-apple-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-apple-blue/20 transition-all disabled:opacity-50"
+                     />
+                 </div>
+
+                 {/* Individual padding controls */}
+                 <div className="grid grid-cols-2 gap-2 text-[10px]">
+                     <div className="flex flex-col gap-1">
+                         <label className="font-medium text-apple-text">上</label>
+                         <input
+                             type="number"
+                             min="0"
+                             max="200"
+                             disabled={isDisabled}
+                             value={settings.paddingTop}
+                             onChange={(e) => handleInputChange('paddingTop', Math.max(0, parseInt(e.target.value) || 0))}
+                             className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
+                         />
+                     </div>
+                     <div className="flex flex-col gap-1">
+                         <label className="font-medium text-apple-text">下</label>
+                         <input
+                             type="number"
+                             min="0"
+                             max="200"
+                             disabled={isDisabled}
+                             value={settings.paddingBottom}
+                             onChange={(e) => handleInputChange('paddingBottom', Math.max(0, parseInt(e.target.value) || 0))}
+                             className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
+                         />
+                     </div>
+                     <div className="flex flex-col gap-1">
+                         <label className="font-medium text-apple-text">左</label>
+                         <input
+                             type="number"
+                             min="0"
+                             max="200"
+                             disabled={isDisabled}
+                             value={settings.paddingLeft}
+                             onChange={(e) => handleInputChange('paddingLeft', Math.max(0, parseInt(e.target.value) || 0))}
+                             className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
+                         />
+                     </div>
+                     <div className="flex flex-col gap-1">
+                         <label className="font-medium text-apple-text">右</label>
+                         <input
+                             type="number"
+                             min="0"
+                             max="200"
+                             disabled={isDisabled}
+                             value={settings.paddingRight}
+                             onChange={(e) => handleInputChange('paddingRight', Math.max(0, parseInt(e.target.value) || 0))}
+                             className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
+                         />
+                     </div>
+                 </div>
+
+                 <p className="text-[9px] text-apple-subtext text-center">
+                     边距将从每个切片边缘裁剪指定像素
+                 </p>
+             </div>
          </div>
       </Card>
 
-      {/* 3. Padding/Margin Control */}
+      {/* 3. File Naming & Export */}
       <Card className="py-4 px-5">
          <div className="flex items-center justify-between mb-3">
              <h4 className="font-semibold text-xs text-apple-subtext uppercase tracking-wider flex items-center gap-2">
-                 <Crop size={14} /> 切割边距
+                 <FileText size={14} /> 文件命名与导出
              </h4>
-             <button
-                onClick={() => setSettings(prev => ({ ...prev, paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 }))}
-                disabled={isDisabled}
-                className="text-[10px] text-apple-blue hover:underline disabled:opacity-50"
-             >
-                 重置
-             </button>
          </div>
 
          <div className="space-y-3">
-             {/* Unified padding control */}
-             <div className="flex flex-col gap-1.5">
-                 <label className="text-[10px] font-medium text-apple-text">统一边距 (px)</label>
-                 <input
-                     type="number"
-                     min="0"
-                     max="200"
-                     disabled={isDisabled}
-                     placeholder="0"
-                     onChange={(e) => {
-                         const val = Math.max(0, parseInt(e.target.value) || 0);
-                         setSettings(prev => ({ ...prev, paddingTop: val, paddingRight: val, paddingBottom: val, paddingLeft: val }));
-                     }}
-                     className="w-full px-3 py-2 bg-apple-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-apple-blue/20 transition-all disabled:opacity-50"
-                 />
-             </div>
-
-             {/* Individual padding controls */}
-             <div className="grid grid-cols-2 gap-2 text-[10px]">
-                 <div className="flex flex-col gap-1">
-                     <label className="font-medium text-apple-text">上</label>
-                     <input
-                         type="number"
-                         min="0"
-                         max="200"
-                         disabled={isDisabled}
-                         value={settings.paddingTop}
-                         onChange={(e) => handleInputChange('paddingTop', Math.max(0, parseInt(e.target.value) || 0))}
-                         className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
-                     />
-                 </div>
-                 <div className="flex flex-col gap-1">
-                     <label className="font-medium text-apple-text">下</label>
-                     <input
-                         type="number"
-                         min="0"
-                         max="200"
-                         disabled={isDisabled}
-                         value={settings.paddingBottom}
-                         onChange={(e) => handleInputChange('paddingBottom', Math.max(0, parseInt(e.target.value) || 0))}
-                         className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
-                     />
-                 </div>
-                 <div className="flex flex-col gap-1">
-                     <label className="font-medium text-apple-text">左</label>
-                     <input
-                         type="number"
-                         min="0"
-                         max="200"
-                         disabled={isDisabled}
-                         value={settings.paddingLeft}
-                         onChange={(e) => handleInputChange('paddingLeft', Math.max(0, parseInt(e.target.value) || 0))}
-                         className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
-                     />
-                 </div>
-                 <div className="flex flex-col gap-1">
-                     <label className="font-medium text-apple-text">右</label>
-                     <input
-                         type="number"
-                         min="0"
-                         max="200"
-                         disabled={isDisabled}
-                         value={settings.paddingRight}
-                         onChange={(e) => handleInputChange('paddingRight', Math.max(0, parseInt(e.target.value) || 0))}
-                         className="px-2 py-1.5 bg-apple-gray rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/20 disabled:opacity-50"
-                     />
-                 </div>
-             </div>
-
-             <p className="text-[9px] text-apple-subtext text-center">
-                 边距将从每个切片边缘裁剪指定像素
-             </p>
-         </div>
-      </Card>
-
-      {/* 4. File Naming */}
-      <Card className="py-4 px-5">
-         <div className="flex items-center justify-between mb-3">
-             <h4 className="font-semibold text-xs text-apple-subtext uppercase tracking-wider flex items-center gap-2">
-                 <FileText size={14} /> 文件命名
-             </h4>
-         </div>
-
-         <div className="space-y-2">
+             {/* File Prefix */}
              <div className="flex flex-col gap-1.5">
                  <label className="text-[10px] font-medium text-apple-text">自定义前缀 (可选)</label>
                  <input
@@ -285,6 +274,17 @@ const Sidebar: React.FC<SidebarProps> = ({
                  />
              </div>
 
+             {/* Export Format */}
+             <div className="flex flex-col gap-1.5">
+                <label className="text-[10px] font-medium text-apple-text">导出格式</label>
+                <div className="flex bg-apple-gray p-1 rounded-xl">
+                    {(['png', 'jpg', 'webp'] as const).map(fmt => (
+                    <button key={fmt} disabled={isDisabled} onClick={() => handleInputChange('format', fmt)} className={`flex-1 py-1.5 text-xs font-medium uppercase rounded-lg transition-all ${settings.format === fmt ? 'bg-white shadow-sm text-apple-text' : 'text-apple-subtext hover:text-apple-text'}`}>{fmt}</button>
+                    ))}
+                </div>
+            </div>
+
+             {/* Preview */}
              <div className="text-[9px] text-apple-subtext bg-apple-gray/50 rounded-lg p-2">
                  <p className="font-medium mb-1">预览格式:</p>
                  <code className="text-apple-text">
@@ -294,7 +294,7 @@ const Sidebar: React.FC<SidebarProps> = ({
          </div>
       </Card>
 
-      {/* 5. Download Action */}
+      {/* 4. Download Action */}
       <div className="mt-auto pt-2">
         <Button 
             onClick={handleDownload} variant="primary" 
