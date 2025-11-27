@@ -51,20 +51,20 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
                 <Sparkles size={18} />
               </button>
               <a
-                href="https://github.com/onebtcdesign/BlockX"
+                href="https://github.com/node/gridspliter"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-apple-gray text-apple-subtext hover:text-apple-text transition-all duration-200"
-                aria-label="GitHub Repository"
+                aria-label="GitHub Repository(fork)"
               >
                 <Github size={18} />
               </a>
               <a
-                href="https://x.com/onebtcdesign"
+                href="https://x.com/nodex"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-apple-gray text-apple-subtext hover:text-apple-blue transition-all duration-200"
-                aria-label="Follow us on X (Twitter)"
+                aria-label="Follow me on X (Twitter)"
               >
                 <XIcon />
               </a>
@@ -103,20 +103,20 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
             <Sparkles size={20} />
           </button>
           <a
-            href="https://github.com/onebtcdesign/BlockX"
+            href="https://github.com/node/gridspliter"
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-text transition-all duration-200"
-            aria-label="GitHub Repository"
+            aria-label="GitHub Repository(fork)"
           >
             <Github size={20} />
           </a>
           <a
-            href="https://x.com/onebtcdesign"
+            href="https://x.com/nodex"
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-blue transition-all duration-200"
-            aria-label="Follow us on X (Twitter)"
+            aria-label="Follow me on X (Twitter)"
           >
             <XIcon />
           </a>
