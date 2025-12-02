@@ -120,6 +120,15 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
           >
             <XIcon />
           </a>
+          <a
+            href="https://askma.vercel.app/ama/cy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-blue transition-all duration-200"
+            aria-label="Feedback Issue (AskMA)"
+          >
+            <Heart size={20} />
+          </a>
         </div>
       </nav>
       <TutorialModal isOpen={showTutorial} onClose={() => setShowTutorial(false)} />
