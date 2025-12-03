@@ -127,7 +127,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
             className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-blue transition-all duration-200"
             aria-label="Feedback Issue (AskMA)"
           >
-            <Heart size={20} />
+            <XIcon />
           </a>
         </div>
       </nav>
