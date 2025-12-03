@@ -112,15 +112,6 @@ const Navbar: React.FC<NavbarProps> = ({ mobile = false }) => {
             <Github size={20} />
           </a>
           <a
-            href="https://x.com/nodex"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-apple-gray text-apple-subtext hover:text-apple-blue transition-all duration-200"
-            aria-label="Follow me on X (Twitter)"
-          >
-            <XIcon />
-          </a>
-          <a
             href="https://askma.vercel.app/ama/cy"
             target="_blank"
             rel="noopener noreferrer"
